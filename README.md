@@ -14,7 +14,7 @@ Clonar el repositorio:
 git clone https://github.com/AxelFlores05/countries_frontend.git
 cd countries_frontend
 
-Instalar dependencias
+Instalar dependencias:
 npm install
 
 Ejecutar la aplicacion:

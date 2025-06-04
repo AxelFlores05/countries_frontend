@@ -7,6 +7,8 @@ export default function HomePage() {
   const [countries, setCountries] = useState([]);
   const [filtered, setFiltered] = useState([]);
   const [search, setSearch] = useState("");
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
   
   //----API----//
   useEffect(() => {
@@ -20,6 +22,9 @@ export default function HomePage() {
         setFiltered(sorted);
       } catch (err) {
         console.error(err);
+        setError("Error al obtener los países");
+      } finally {
+        setLoading(false);
       }
     };
     load();
@@ -36,6 +41,7 @@ export default function HomePage() {
   return (
     <main className="min-h-screen p-6 bg-white text-black">
       <h1 className="text-3xl font-bold mb-6">Lista de Países</h1>
+
       <input
         type="text"
         placeholder="Buscar por nombre"
@@ -43,7 +49,11 @@ export default function HomePage() {
         value={search}
         onChange={(e) => setSearch(e.target.value)}
       />
-      <CountryTable countries={filtered} />
+
+      {loading && <p className="text-gray-500">Cargando países...</p>}
+      {error && <p className="text-red-600">{error}</p>}
+
+      {!loading && !error && <CountryTable countries={filtered} />}
     </main>
   )
 }

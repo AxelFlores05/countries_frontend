@@ -2,6 +2,14 @@ import React from "react";
 
 const CountryTable = ({countries}) => {
 
+    if (!Array.isArray(countries) || countries.length === 0) {
+        return (
+            <p className="text-gray-500 italic mt-4">
+                No se encontraron paises para mostrar.
+            </p>
+        )
+    }
+
     return(
         <div className="p-4">
             <div className="overflow-x-auto shadow-md rounded-lg">
